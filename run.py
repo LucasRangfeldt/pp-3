@@ -26,7 +26,7 @@ def print_board(board):
 
         # Prints the board row and only shows the visible ships
         for cell in row:
-            if cell == 'S' or cell == 'Hit' or cell == 'Miss':
+            if cell == 'S' or cell == 'H' or cell == 'M':
                 print(cell, end="  ")
             else:
                 print('~', end="  ")
@@ -47,10 +47,10 @@ def place_random_ships(board, num_ships, target):
 # Function for guessing a position
 def guess(board, row, col, target):
     if board[row][col] == target:
-        board[row][col] = 'Hit' 
+        board[row][col] = 'H' 
         return True
     else:
-        board[row][col] = 'Miss'
+        board[row][col] = 'M'
         return False
     
 # main code for board
@@ -58,7 +58,7 @@ rows, cols = 5, 5
 board = create_board(rows, cols)
 
 # Places five visible and five invisible ships S for visible and X for invis.
-# The X will only be visible after the match is finished, or hit
+# The X will transform into a H if hit, or be revealed when match is over
 place_random_ships(board, 5, 'S')
 place_random_ships(board, 5, 'X')
 
