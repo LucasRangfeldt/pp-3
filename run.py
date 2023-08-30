@@ -43,3 +43,18 @@ place_random_ships(board, 5, 'I')
 
 print('Your board:')
 print_board(board)
+
+player_ships_left = 5
+opp_ships_left = 5
+
+while player_ships_left > 0 and opp_ships_left > 0:
+    # player makes their guess
+    row = int(input("Enter row: "))
+    col = int(input("Enter column:"))
+    
+    if guess(board, row, col, 'I'):
+        print("Hit!")
+        opp_ships_left -=1
+    else:
+        print("Miss...")
+        
