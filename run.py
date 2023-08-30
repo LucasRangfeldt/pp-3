@@ -52,4 +52,49 @@ def place_ship(board, row, col, length, orientation):
         return False
     return True
 
+"""
+
+"""
+def randomly_place_ships(board, num_ships, length):
+    for _ in range(num_ships):
+        placed = False
+        while not placed:
+            row = random.randint(0, len(board) - 1)
+            col = random.randint(0, len(board[0]) - 1)
+            orientation = random.choice(['Horizontal', 'Vertical'])
+            placed = place_ship(board, row, col, length, orientation)       
+             
+
+"""
+Deplopys one ship on the board
+"""
+if place_ship(board, 2, 0, 3):
+    print("Ship Has Been Deployed!")
+else:
+    print("Couldn't Successfully Deploy...")
+"""
+Function for hit or miss.
+"""
+def guess(board, row, col):
+    if row < 0 or row >= len(board) or col < 0 or col >= len(board[0]):
+        return "Nice try, but that's not the ocean."
+    if board[row][col] == 'X':
+        board[row][col] = 'H'
+        return "Hit!"
+    else:
+        if board[row][col] != 'H' and board[row][col] != 'M':
+            board[row][col] = 'M'
+        return "Miss..."
+    
+
+def destroyed_ships(board):
+    count = 0
+    for row in board:
+        for column in row:
+            if column=='X':
+                count+=1
+    return count
+
+
+
 print_board(board)
