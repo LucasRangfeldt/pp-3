@@ -24,3 +24,13 @@ def place_random_ships(board, num_ships, target):
             board[row][col] = target
             placed_ships += 1
             
+# Function for guessing a position
+def guess(board, row, col, target):
+    if board[row][col] == target:
+        board[row][col] = 'Hit' 
+        return True
+    else:
+        board[row][col] = 'Miss'
+        return False
+    
+            
