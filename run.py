@@ -33,4 +33,13 @@ def guess(board, row, col, target):
         board[row][col] = 'Miss'
         return False
     
-            
+# main code for board
+rows, cols = 5, 5
+board = create_board(rows, cols)
+
+# Places five visible and five invisible ships (V) and (I)
+place_random_ships(board, 5, 'V')
+place_random_ships(board, 5, 'I')
+
+print('Your board:')
+print_board(board)
