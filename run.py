@@ -68,34 +68,38 @@ print_board(board)
 player_ships_left = 5
 opp_ships_left = 5
 
+# Keeping track of already made guesses
+player_guess = []
+opp_guesses = []
 
 # player makes their guess
 while player_ships_left > 0 and opp_ships_left > 0:
     while True:
-        row = int(input("Enter row (0-4): "))
-        if 0 <= row <= 4:
-            break
-        else:
-            print("Error, please enter a number between 0 and 4.")
-            
-    while True:
-        # Forces the input of A-E to be in uppercase
         col = input("Enter column (A-E): ").upper()
-        if col in ['A','B','C', 'D', 'E']:
+        if col in ['A','B','C','D','E']:
+            col_dict = {'A': 0, 'B': 1, 'C': 2, 'D': 3, 'E': 4}
+            col_index = col_dict[col]
             break
         else:
-            print("Error, please enter a letter between A and E")
-            
-        # Converts strings entered to integers
-    col_dict = {'A': 0, 'B': 1, 'C': 2, 'D': 3, 'E': 4}
-    col_index = col_dict[col]
-    
+            print("Error, please enter a letter between A and E.")
+
+    while True:
+        try:
+            row = int(input("Enter row (0-4): "))
+            if 0 <= row <= 4 and (row, col_index) not in player_guess:
+                player_guess.append((row, col_index))
+                break
+            elif (row, col_index) in player_guess:
+                print("You already suggested those coordinates, try again!")
+            else:
+                print("Please, enter a number between 0 and 4.")
+        except ValueError:
+            print("Please, enter a valid number.")
     if guess(board, row, col_index, 'X'):
         print("Hit!")
         opp_ships_left -= 1
     else:
         print("Miss...")
-
         
 # Opponents make their guess
     opp_row = random.randint(0, len(board) - 1)
