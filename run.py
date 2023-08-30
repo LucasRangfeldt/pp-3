@@ -13,3 +13,14 @@ def create_board(rows, cols):
 def print_board(board):
     for row in board:
     	print(' '.join(row))
+
+# Function for randomly generating ships on the board
+def place_random_ships(board, num_ships, target):
+    placed_ships = 0
+    while placed_ships < num_ships:
+        row = random.randint(0, len(board) - 1)
+        col = random.randint(0, len(board[0]) - 1)
+        if board[row][col] == '!':
+            board[row][col] = target
+            placed_ships += 1
+            
