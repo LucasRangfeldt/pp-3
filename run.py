@@ -47,14 +47,27 @@ print_board(board)
 player_ships_left = 5
 opp_ships_left = 5
 
+# player makes their guess
 while player_ships_left > 0 and opp_ships_left > 0:
-    # player makes their guess
+    
     row = int(input("Enter row: "))
     col = int(input("Enter column:"))
     
     if guess(board, row, col, 'I'):
         print("Hit!")
-        opp_ships_left -=1
+        opp_ships_left -= 1
     else:
         print("Miss...")
         
+# Opponents make their guess
+    opp_row = random.randint(0, len(board) - 1)
+    opp_col = random.randint(0, len(board[0]) - 1)
+    
+    if guess(board, opp_row, opp_col, 'V'):
+        print(f"Opponent hit your ship on on row {opp_row} and column {opp_col}!")
+        player_ships_left -= 1
+    else:
+        print("Opponent missed!")
+        
+    print_board(board)
+    
