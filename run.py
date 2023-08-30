@@ -2,6 +2,8 @@
 # You can delete these comments, but do not change the name of this file
 # Write your code to expect a terminal of 80 characters wide and 24 rows high
 
+import random
+
 """
 Function for creating a board.
 """
@@ -26,31 +28,28 @@ board = create_board(rows, cols)
 """
 Function for deploying a ship on the board
 """
-def place_ship(board, row, col, length):
-    if row < 0 or row >= len(board):
-        return False
-    if col < 0 or col + length > len(board[0]):
-        return True
-    """
-    Checks if the ship can be placed without overlapping another ship
-    """
-    for i in range(col, col + length):
-        if board[row][i] != '!':
+def place_ship(board, row, col, length, orientation):
+    if orientation == 'Horizontal':
+        if row < 0 or row >= len(board) or col < 0 or col + length > len(board[0]):
             return False
-    
-    """
-    Place ship
-    """ 
-    for i in range(col, col + length):
-        board[row][i] = 'X'
+        
+        for i in range(col, col + length):
+            if board[row][i] != '!':
+                return False
+            
+        for i in range(col, col + length):
+            board[row][i] = 'X'
+            
+    elif orientation == 'Vertical':
+        if col < 0 or col >= len(board[0]) or row < 0 or row + length > len(board):
+            return False
+        for i in range(row, row + length):
+            if board[i][col] != '!':
+                return False
+        for i in range(row, row + length):
+            board[i][col] = 'X'
+    else:
+        return False
     return True
 
-"""
-Deplopys one ship on the board
-"""
-if place_ship(board, 2, 0, 3):
-    print("Ship Has Been Deployed!")
-else:
-    print("Couldn't Successfully Deploy...")
-    
 print_board(board)
