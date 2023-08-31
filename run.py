@@ -74,37 +74,42 @@ already_guessed = []
 opp_already_guessed = []
 # player makes their guess
 while player_ships_left > 0 and opp_ships_left > 0:
-    while True:
-        try:
-            col = input("Enter column (A-E): ").upper()
-            if col not in ['A','B','C','D','E']:
-                raise ValueError("Invalid column. Please enter a letter between A and E.")
-        
-            col_dict = {'A': 0, 'B': 1, 'C': 2, 'D': 3, 'E': 4}
-            col_index = col_dict[col]
-        
-            row = int(input("Enter row (0-4): "))
-            if row < 0 or row > 4:
-                raise ValueError("Invalid row. Please enter a number between 0 and 4.")
-        
-            if (row, col_index) in already_guessed:
-                raise ValueError("You already guessed those coordinates. Try again.")
+    while player_ships_left > 0 and opp_ships_left > 0:
+        while True:
+            try:
+                col = input("Enter column (A-E): ").upper()
+                if col not in ['A', 'B', 'C', 'D', 'E']:
+                    raise ValueError("Invalid coordinate, Please enter a letter between A and E.")
+                col_dict = {'A': 0, 'B': 1, 'C': 2, 'D': 3, 'E': 4}
+                col_index = col_dict[col]
+                break
+            except ValueError as e:
+                print("Are you sure you are inserting the right value?")
 
-            if board[row][col_index] == 'S':
-                raise ValueError("You can't target your own ship!")
+        while True:
+            try:
+                row = int(input("Enter row (0-4): "))
+                if row not in [0, 1, 2, 3, 4]:
+                    raise ValueError("Invalid coordinate, Please enter a number between 0 and 4.")
+                break
+            except ValueError as e:
+                print("Are you sure you are inserting the right value?")
 
-            already_guessed.append((row, col_index))
-            if guess(board, row, col_index, 'X'):
-                print(f"You hit the opponent's ship at row {row} and column {col}!")
-                opp_ships_left -= 1
-            else:
-                print("You missed!")
-            break
-        
-        except ValueError as e:
-            print(e)
-            
-    # NPC RNG guess
+    try:
+        if (row, col_index) in already_guessed:
+            raise ValueError("You already guessed those coordinates. Try again.")
+        if board[row][col_index] == 'S':
+            raise ValueError("You can't target your own ship!")
+        already_guessed.append((row, col_index))
+        if guess(board, row, col_index, 'X'):
+            print(f"You hit the opponent's ship at row {row} and column {col}!")
+            opp_ships_left -= 1
+        else:
+            print("You missed!")
+    except ValueError as e:
+        print("Hmm, try again. Something went wrong")
+        continue
+
     opp_row = random.randint(0, len(board) - 1)
     opp_col = random.randint(0, len(board[0]) - 1)
     if (opp_row, opp_col) not in opp_already_guessed:
@@ -117,7 +122,6 @@ while player_ships_left > 0 and opp_ships_left > 0:
             
     print_board(board)
     
-# Announces the winner and reveals board
 if player_ships_left == 0:
     print("You lost, better luck next time!")
 elif opp_ships_left == 0:
