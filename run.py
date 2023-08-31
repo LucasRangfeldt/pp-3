@@ -69,8 +69,7 @@ player_ships_left = 5
 opp_ships_left = 5
 
 # Keeping track of already made guesses
-player_guess = []
-opp_guesses = []
+already_guessed = []
 
 # player makes their guess
 while player_ships_left > 0 and opp_ships_left > 0:
@@ -86,22 +85,27 @@ while player_ships_left > 0 and opp_ships_left > 0:
     while True:
         try:
             row = int(input("Enter row (0-4): "))
-            if 0 <= row <= 4 and (row, col_index) not in player_guess:
-                player_guess.append((row, col_index))
-                break
-            elif (row, col_index) in player_guess:
-                print("You already suggested those coordinates, try again!")
+            if 0 <= row <= 4 and (row, col_index) not in already_guessed :
+                if board[row][col_index] != 'S':  # Checks if guessing on allied ship
+                    already_guessed.append((row, col_index))
+                    if guess(board, row, col_index, 'X'):
+                        print(f"You hit the opponent's ship at row {row} and column {col}!")
+                        opp_ships_left -= 1
+                    else:
+                        print("You missed!")
+                    break
+                else:
+                    print("You can't target your own ship!")
+            elif (row, col_index) in already_guessed:
+                print("You or the opponent already guessed these coordinates, try again!")
             else:
                 print("Please, enter a number between 0 and 4.")
         except ValueError:
             print("Please, enter a valid number.")
-    if guess(board, row, col_index, 'X'):
-        print("Hit!")
-        opp_ships_left -= 1
-    else:
-        print("Miss...")
-        
-# Opponents make their guess
+
+
+    
+# Opponent RNG guess
     opp_row = random.randint(0, len(board) - 1)
     opp_col = random.randint(0, len(board[0]) - 1)
     """
