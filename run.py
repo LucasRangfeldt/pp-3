@@ -61,10 +61,11 @@ board = create_board(rows, cols)
 # The X will transform into a H if hit, or be revealed when match is over
 place_random_ships(board, 5, 'S')
 place_random_ships(board, 5, 'X')
-
-print('Your board:')
+print("Welcome to the Battlefield!")
+print("You and the opponent(NPC) both get 5 ships each")
+print("You can both see your own ships, marked S")
+print("Whomever destroys all five enemy ships first, wins")
 print_board(board)
-
 player_ships_left = 5
 opp_ships_left = 5
 
@@ -81,7 +82,6 @@ while player_ships_left > 0 and opp_ships_left > 0:
             break
         else:
             print("Error, please enter a letter between A and E.")
-
     while True:
         try:
             row = int(input("Enter row (0-4): "))
@@ -103,9 +103,6 @@ while player_ships_left > 0 and opp_ships_left > 0:
         except ValueError:
             print("Please, enter a valid number.")
 
-
-    
-# Opponent RNG guess
     opp_row = random.randint(0, len(board) - 1)
     opp_col = random.randint(0, len(board[0]) - 1)
     """
@@ -119,4 +116,4 @@ while player_ships_left > 0 and opp_ships_left > 0:
         print("Opponent missed!")
         
     print_board(board)
-    
+
