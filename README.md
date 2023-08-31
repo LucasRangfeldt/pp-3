@@ -1,32 +1,54 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Super Battleship Mania
 
-Welcome,
+## Desc
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **March 14, 2023**
+![Image](./images/battlefiend.jpg)
+![Image-2](./images/maniabattle.jpg)
+This is a simple game of Battleships created using Python, you play against an NPC
+that makes random guesses, just like you. Who ever sinks all five of the enemy's ship first wins.
 
-## Reminders
+## How To Play
 
-- Your code must be placed in the `run.py` file
-- Your dependencies must be placed in the `requirements.txt` file
-- Do not edit any of the other files or your code may not deploy properly
+- click [this](https://pp-3lucas-ab3a595ba6a2.herokuapp.com/) link and you will be taken directly to the game, no strings attached
+- Once you are there, you will see a 5x5 board with five 'S' on it, these 'S' symbolizes ships and can only be seen by you
+- The goal is simple, locate and destroy the opponents ships one by one, you will take turn
+- The ultimate champion is the one who succeds first
 
-## Creating the Heroku app
+## Features
 
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
+- Ships are randomly placed on the combined board
+- After each guess the attempts will be printed
+- Input validation, you can't enter any invalid or already guessed information
 
-1. `heroku/python`
-2. `heroku/nodejs`
+## Data Model
 
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
+Standard Board 2D model, the game creates a 5x5 board for the two players to share
+The game uses a lot of the try mechanism to figure out what's going on, personally I think
+it's a great way to approach this sort of game.
 
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
+## Testing
 
-Connect your GitHub repository and deploy as normal.
+Passed it through a PEP8 with no appearant issues
+Given a ton of invalid inputs such as strings where integers were expected
+and also made repeated guesses.
 
-## Constraints
+## Bugs
 
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
+There are none
 
----
+## Deployment
 
-Happy coding!
+It was deployed using Code Institutes mock terminal for Heroku
+In order to deploy, I did the following
+
+- Cloned this repository
+- Create a new Heroku app
+- Set the buildpacks to Heroku/Python and Heroku/Nodejs in that exact order
+- Link the app to the repository
+- Click Deploy
+
+## Credits
+
+- Code Institute for Template and mock terminal
+- My most amazing buddy Mikke for the countless amount of explaining(Mentoring/tutoring me a little bit)
+- OpenAI for when Mikke is sleeping. Mostly validation, tutoring and tips

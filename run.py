@@ -4,7 +4,7 @@
 
 # This code is written by Lucas Rangfeldt
 # Big thanks to ChatGPT for examples and ideas
-# Also big thanks to Mike for helping me troubleshoot.
+# Also big thanks to Mikke for helping me troubleshoot.
 import random
 
 # Function for game board
