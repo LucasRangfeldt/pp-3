@@ -107,7 +107,7 @@ while player_ships_left > 0 and opp_ships_left > 0:
         else:
             print("You missed!")
     except ValueError as e:
-        print("Hmm, try again. Something went wrong")
+        print(e)
         continue
 
     opp_row = random.randint(0, len(board) - 1)
